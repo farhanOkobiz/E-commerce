@@ -25,7 +25,7 @@ const CartOverView: React.FC<Props> = ({ products, shipping }) => {
         className="top-10 left-0 absolute lg:hidden bg-[#1D4092] w-full py-2 cursor-pointer"
       >
         <h2 className="text-center text-white text-sm font-semibold">
-          Cart Overview
+          Checkout Overview
         </h2>
       </div>
 
@@ -43,7 +43,7 @@ const CartOverView: React.FC<Props> = ({ products, shipping }) => {
             } lg:block lg:mt-8`}
           >
             <div className="flex xl:justify-center gap-4 border-b border-black/20 pb-2 ">
-              <div className="xl:text-2xl text-xl font-bold">Cart Overview</div>
+              <div className="xl:text-2xl text-xl font-bold">Checkout Overview</div>
               <Link href="/cart">
                 <div className="font-bold text-[#D4A373] hover:underline">
                   Modify Order
@@ -84,7 +84,7 @@ const CartOverView: React.FC<Props> = ({ products, shipping }) => {
             </div>
 
             <div className="flex justify-between font-bold text-[16px] py-3 border-t border-black/20">
-              <p>subtotal:</p>
+              <p>Subtotal:</p>
               <p className="text-[#D4A373] text-[20px]">
                 ৳{products?.totalPrice}
               </p>

@@ -141,18 +141,13 @@ const NavBar: React.FC<NavBarProps> = ({ userCartProducts }) => {
               <div className="">
                 <SearchForm onClose={() => {}} />
               </div>
-              <div className="lg:flex hidden items-center justify-center  ml-8">
+              <div className="lg:flex hidden items-center justify-center ml-8">
                 {menuList?.map((menu, index) => (
                   <div
                     onMouseEnter={() => setActiveMenu(menu.title)}
                     onMouseLeave={() => setActiveMenu(null)}
                     key={index}
                   >
-                    {/* <Link href={menu.link}>
-                      <li className="list-none py-4  hover:text-[#1E3E96] tracking-wider duration-300 menuTitle">
-                        {menu.title}
-                      </li>
-                    </Link> */}
 
                     <Link href={menu.link}>
                       <li

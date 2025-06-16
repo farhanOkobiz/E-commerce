@@ -60,7 +60,7 @@ export const ProductTable: React.FC<Props> = ({ data, pagination }) => {
                   <TableHead
                     key={header.id}
                     style={{
-                      width: header.getSize(), // Apply width from columnDef.size
+                      width: header.getSize(),
                     }}
                     className={
                       (header.column.columnDef.meta as any)?.align

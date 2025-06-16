@@ -38,6 +38,8 @@ const MainCheckOut = () => {
   }, [coupon]);
   // ============
 
+  console.log("MainCheckOut products", products);
+
   return (
     <div className="min-h-screen">
       {products && (

@@ -1,7 +1,7 @@
 {
-  "name": "nohasan-admin",
+  "name": "e-commerce-admin",
   "version": "0.1.0",
-  "author": "Ifshad Hasan Sharan",
+  "author": "Farhan Hassan Jabil",
   "private": true,
   "scripts": {
     "dev": "next dev",

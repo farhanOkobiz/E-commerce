@@ -29,6 +29,7 @@ import Link from "next/link";
 export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const brandName = process.env.NEXT_PUBLIC_BRAND_NAME;
 
   const router = useRouter();
   const { toast } = useToast();
@@ -157,7 +158,7 @@ export default function LoginPage() {
       <div className="max-h-screen flex justify-center items-center">
         <Image
           src={logo}
-          alt="Login to NoHasan"
+          alt={`Login to ${brandName}`}
           // height={1600}
           // width={800}
           quality={100}

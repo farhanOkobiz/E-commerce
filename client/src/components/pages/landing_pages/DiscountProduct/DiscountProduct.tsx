@@ -98,7 +98,7 @@ const DiscountProduct: React.FC<ProductsProps> = ({ products }) => {
             </SwiperSlide>
           ))
         ) : (
-          <p>No products found.</p>
+          <p></p>
         )}
       </Swiper>
     </div>

@@ -35,7 +35,7 @@ export const CreateForm: React.FC = () => {
   const [fileList, setFileList] = React.useState([]);
   const [vectorFileList, setVectorFileList] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
-const formSchema = getFormSchema(false);
+  const formSchema = getFormSchema(false);
   const form = useForm<z.infer<typeof formSchema>>({
     // resolver: zodResolver(formSchema(false)),
     resolver: zodResolver(formSchema),
@@ -118,7 +118,8 @@ const formSchema = getFormSchema(false);
               render={() => (
                 <FormItem className="flex-1">
                   <FormLabel>
-                    Image <b className="text-red-500">*</b>
+                    Upload Image (recommended size: 250px × 250px){" "}
+                    <b className="text-red-500">*</b>
                   </FormLabel>
                   <Upload
                     listType="picture-card"
@@ -145,7 +146,8 @@ const formSchema = getFormSchema(false);
               render={() => (
                 <FormItem className="flex-1">
                   <FormLabel>
-                    Vector Image <b className="text-red-500">*</b>
+                    Vector Image (recommended size: 250px × 250px){" "}
+                    <b className="text-red-500">*</b>
                   </FormLabel>
                   <Upload
                     listType="picture-card"

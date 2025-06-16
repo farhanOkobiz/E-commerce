@@ -5,9 +5,10 @@ import { ThemeProvider } from "next-themes";
 import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
+const brandName = process.env.NEXT_PUBLIC_BRAND_NAME;
 
 export const metadata: Metadata = {
-  title: "Login | NoHasan",
+  title: `Login | ${brandName}`,
 };
 
 export default function RootLayout({

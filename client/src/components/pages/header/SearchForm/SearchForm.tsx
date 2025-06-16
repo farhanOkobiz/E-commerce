@@ -47,7 +47,7 @@ const SearchForm: React.FC<ResponsiveSearchFormProps> = ({ onClose }) => {
         <input
           className="outline-none w-full"
           type="text"
-          placeholder="Eau De Search..."
+          placeholder="Search products..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />

@@ -53,7 +53,6 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
   const handleAddToCart = async () => {
     const user = await getUser();
     setLoading(true);
-    // if not logged in then redirect to login page
     if (!user) {
       toast.error("Please login to add product to cart.");
       router.push("/login");
@@ -124,6 +123,10 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
     }
   };
 
+  const handleBuyNow = async () => {
+
+  }
+
   return (
     <div className="Container  py-8 min-h-100 lg:mt-0 mt-22">
       <div className="grid lg:grid-cols-2 gap-8 ">
@@ -141,64 +144,54 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
           </h2>
 
           <div className="flex gap-2 mt-2">
-            <p className="flex items-center gap-1 font-semibold text-xl">
-              <span>৳</span>{" "}
-              <span>
-                {(() => {
-                  let selectedItem;
-                  if (
-                    inventoryType === "levelInventory" ||
-                    inventoryType === "colorLevelInventory"
-                  ) {
-                    selectedItem = Array.isArray(inventoryRef)
-                      ? inventoryRef.find((item) => item._id === selectedLevel)
-                      : undefined;
-                  } else if (inventoryType === "colorInventory") {
-                    selectedItem = Array.isArray(inventoryRef)
-                      ? inventoryRef.find((item) => item._id === selectedColor)
-                      : undefined;
-                  }
+            {(() => {
+              let selectedItem;
+              if (
+                inventoryType === "levelInventory" ||
+                inventoryType === "colorLevelInventory"
+              ) {
+                selectedItem = Array.isArray(inventoryRef)
+                  ? inventoryRef.find((item) => item._id === selectedLevel)
+                  : undefined;
+              } else if (inventoryType === "colorInventory") {
+                selectedItem = Array.isArray(inventoryRef)
+                  ? inventoryRef.find((item) => item._id === selectedColor)
+                  : undefined;
+              }
 
-                  // Fall back to index 0 if no valid selection
-                  const fallbackItem = Array.isArray(inventoryRef)
-                    ? inventoryRef[0]
-                    : undefined;
-                  const price = selectedItem?.price ?? fallbackItem?.price;
+              const fallbackItem = Array.isArray(inventoryRef)
+                ? inventoryRef[0]
+                : undefined;
 
-                  return price ? Number(price).toFixed(2) : "0.00";
-                })()}
-              </span>
-            </p>
+              const price = Number(
+                selectedItem?.price ?? fallbackItem?.price ?? 0
+              ).toFixed(2);
+              const mrpPrice = Number(
+                selectedItem?.mrpPrice ?? fallbackItem?.mrpPrice ?? 0
+              ).toFixed(2);
 
-            <p className="line-through text-[#262626]/60 font-semibold flex items-center gap-1">
-              <span>৳</span>
-              <span>
-                {(() => {
-                  let selectedItem;
-                  if (
-                    inventoryType === "levelInventory" ||
-                    inventoryType === "colorLevelInventory"
-                  ) {
-                    selectedItem = Array.isArray(inventoryRef)
-                      ? inventoryRef.find((item) => item._id === selectedLevel)
-                      : undefined;
-                  } else if (inventoryType === "colorInventory") {
-                    selectedItem = Array.isArray(inventoryRef)
-                      ? inventoryRef.find((item) => item._id === selectedColor)
-                      : undefined;
-                  }
-
-                  // Fall back to index 0 if no valid selection
-                  const fallbackItem = Array.isArray(inventoryRef)
-                    ? inventoryRef[0]
-                    : undefined;
-                  const mrpPrice =
-                    selectedItem?.mrpPrice ?? fallbackItem?.mrpPrice;
-
-                  return mrpPrice ? Number(mrpPrice).toFixed(2) : "0.00";
-                })()}
-              </span>
-            </p>
+              if (price === mrpPrice) {
+                return (
+                  <p className="flex items-center gap-1 font-semibold text-xl">
+                    <span>৳</span>
+                    <span>{mrpPrice}</span>
+                  </p>
+                );
+              } else {
+                return (
+                  <>
+                    <p className="flex items-center gap-1 font-semibold text-xl">
+                      <span>৳</span>
+                      <span>{price}</span>
+                    </p>
+                    <p className="line-through text-[#262626]/60 font-semibold flex items-center gap-1">
+                      <span>৳</span>
+                      <span>{mrpPrice}</span>
+                    </p>
+                  </>
+                );
+              }
+            })()}
           </div>
 
           <div className="mt-3">
@@ -275,7 +268,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
           </div>
 
           <div className="border-b pb-4">
-            <div className="mt-4 flex items-center gap-2 ">
+            <div className="mt-4 flex flex-col gap-y-5">
               <div className="flex items-center justify-between border rounded px-3 py-[7px] md:w-[25%] w-[30%]">
                 <p onClick={handleDecrement} className="cursor-pointer">
                   <FiMinus />
@@ -285,17 +278,31 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
                   <FiPlus />
                 </p>
               </div>
-              <div className="w-full cursor-pointer">
-                <button
-                  onClick={handleAddToCart}
-                  className="bg-[#D4A373] hover:bg-[#CCD5AE] duration-300 flex items-center gap-1 px-6 py-2.5 font-semibold text-sm  rounded text-[#fff] cursor-pointer"
-                >
-                  <span>
-                    <FiPlus />
-                  </span>
+              <div className="flex gap-x-4">
+                <div className="cursor-pointer">
+                  <button
+                    onClick={handleBuyNow}
+                    className="bg-[#CCD5AE] hover:bg-[#D4A373] duration-300 flex items-center gap-1 px-6 py-2.5 font-semibold text-sm  rounded text-[#fff] cursor-pointer"
+                  >
+                    <span>
+                      <FiPlus />
+                    </span>
 
-                  <span>{loading ? "Sending..." : "Add To Cart"}</span>
-                </button>
+                    <span>{loading ? "Sending..." : "Buy Now"}</span>
+                  </button>
+                </div>
+                <div className="cursor-pointer">
+                  <button
+                    onClick={handleAddToCart}
+                    className="bg-[#D4A373] hover:bg-[#CCD5AE] duration-300 flex items-center gap-1 px-6 py-2.5 font-semibold text-sm  rounded text-[#fff] cursor-pointer"
+                  >
+                    <span>
+                      <FiPlus />
+                    </span>
+
+                    <span>{loading ? "Sending..." : "Add To Cart"}</span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>

@@ -69,12 +69,6 @@ export const discountTypes = [
   { name: "Percentage", key: "percent" },
 ];
 
-export const genderEnums = [
-  { name: "Male", key: "men" },
-  { name: "Female", key: "women" },
-  { name: "Unisex", key: "unisex" },
-];
-
 export const inventoryTypes = [
   { name: "Color", key: "colorInventory" },
   { name: "Size", key: "levelInventory" },
@@ -368,43 +362,12 @@ export const CreateProductForm: React.FC = () => {
               />
               <FormField
                 control={form.control}
-                name="gender"
-                render={({ field }) => (
-                  <div className="flex items-end gap-2 w-full">
-                    <FormItem className="flex-1">
-                      <FormLabel>Gender</FormLabel>
-                      <FormControl>
-                        <Select
-                          onValueChange={field.onChange}
-                          value={field.value}
-                        >
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select gender" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {genderEnums.map((type) => (
-                              <SelectItem key={type.key} value={type.key}>
-                                {type.name}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      </FormControl>
-                      <FormDescription className="text-red-400 text-xs min-h-4">
-                        {form.formState.errors.gender?.message}
-                      </FormDescription>
-                    </FormItem>
-                  </div>
-                )}
-              />
-              <FormField
-                control={form.control}
                 name="brandRef"
                 render={({ field }) => (
                   <div className="flex items-end gap-2 w-full">
                     <FormItem className="flex-1">
                       <FormLabel>
-                        Brand<b className="text-red-500">*</b>
+                        Brand
                       </FormLabel>
                       <FormControl>
                         <Select
